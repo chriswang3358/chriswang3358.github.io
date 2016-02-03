@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+    html,
+    body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    
+    #map {
+        height: 100%;
+    }
+    </style>
+    <script type="text/javascript">
+    var map;
+
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: {
+                lat: 23.5,
+                lng: 121
+            },
+            zoom: 8
+        });
+
+        window.onload = function() {
+            navigator.geolocation.getCurrentPosition(function(result) {
+                console.log(result);
+
+                var position = {
+                    lat: result.coords.latitude,
+                    lng: result.coords.longitude
+                };
+
+                var marker = new google.maps.Marker({
+                    position: position,
+                    map: map,
+                    title: "My Position"
+                })
+
+            }, function(error) {
+                console.log(error);
+            });
+        };
+
+
+    }
+    /*
+        
+    */
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?callback=initMap" async defer></script>
+</head>
+
+<body>
+    <div id="map" style="width:800px;height:600px;"></div>
+</body>
+
+</html>
